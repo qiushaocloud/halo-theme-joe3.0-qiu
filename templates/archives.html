@@ -14,7 +14,7 @@
            th:classappend="|${theme.config.theme.enable_show_in_up ?'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
         <div class="joe_main">
           <div class="joe_index joe_archives__filing">
-            <div class="title">[[${theme.config.archives.archives_title ?: '文章归档'}]]</div>
+            <div class="title page-title-text-shadow">[[${theme.config.archives.archives_title ?: '文章归档'}]]</div>
             <div class="content">
               <th:block th:if="${theme.config.archives.enable_archives_category}">
               <div class="joe_archives__category animated fadeIn">

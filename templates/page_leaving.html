@@ -6,13 +6,12 @@
   <body>
   <div id="Joe">
     <th:block th:replace="~{modules/macro/navbar :: navbar}" />
-    <div class="joe_container joe_main_container page-sheet"
+    <div class="joe_container joe_main_container page-sheet page-leaving"
          th:classappend="|${theme.config.theme.enable_show_in_up ? 'animated showInUp':''} ${theme.config.aside.aside_position == 'left' ? 'revert':''}|">
       <div class="joe_main">
         <div class="joe_detail" th:with="contributor = ${contributorFinder.getContributor(singlePage.status.contributors[0])}">
 
-          <h1 class="joe_detail__title"
-              th:classappend="${theme.config.post.enable_title_shadow ? 'txt-shadow':''}">[[${singlePage.spec.title}]]</h1>
+          <h1 class="joe_detail__title txt-shadow page-title-text-shadow">[[${singlePage.spec.title}]]</h1>
           <th:block th:if="${theme.config.post.enable_page_meta} and ${#annotations.getOrDefault(singlePage, 'enable_page_meta', 'true')}">
             <div class="joe_detail__count">
               <div class="joe_detail__count-information">
