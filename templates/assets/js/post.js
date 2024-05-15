@@ -82,6 +82,7 @@ const postContext = {
 		const curl = location.href;
 		const author = $(".joe_detail").attr("data-author");
 		const postTitle = $(".joe_detail .joe_detail__title").text();
+		const postDescription = $('html head meta[name=description]').attr('content');
 
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
@@ -94,7 +95,8 @@ const postContext = {
 				.replace(/{postUrl}/g, curl)
 				.replace(/{postTitle}/g, postTitle)
 				.replace(/{postAuthor}/g, author)
-				.replace(/BlogTitle/g, ThemeConfig.blog_title);
+				.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
+				.replace(/{postDescription}/g, postDescription);
 				
 			if (window.clipboardData) {
 				const copytext = selectionText + appendLink;
