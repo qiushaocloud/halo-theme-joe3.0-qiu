@@ -112,8 +112,27 @@ const postContext = {
 			return;
 		if (ThemeConfig.enable_share_link && $(".icon-share-link").length) {
 			$(".icon-share-link").each((_index, item) => {
-				new ClipboardJS($(item)[0], {
-					text: () => location.href,
+				const shareLinkEle = $(item)[0];
+				const postTitle = shareLinkEle.dataset.postTitle;
+				const postDescription = shareLinkEle.dataset.postDescription;
+				const postAuthor = shareLinkEle.dataset.postAuthor;
+				const template = shareLinkEle.dataset.template;
+				
+				// 自定义分享链接模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章【{postTitle}】，链接: {postUrl}
+				let copyContent = window.location.href;
+				if (template) {
+					copyContent = template.replace(/{postUrl}/g, location.href)
+						.replace(/{postTitle}/g, postTitle)
+						.replace(/{postAuthor}/g, postAuthor)
+						.replace(/{postDescription}/g, postDescription);
+
+					if (!/{postUrl}/.test(template)) { // 如果模版中没有{postUrl}变量，则需要追加文章链接
+						copyContent += ` ，文章链接: ${location.href}`;
+					}
+				}
+
+				new ClipboardJS(shareLinkEle, {
+					text: () => copyContent,
 				}).on("success", () => Qmsg.success("文章链接已复制"));
 			});
 		}
