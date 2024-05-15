@@ -90,12 +90,13 @@ const postContext = {
 
 			const appendLink = (ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
-				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}\r\n文章标题： ${postTitle}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}(${ThemeConfig.blog_url})\r\n文章标题： ${postTitle}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
 				: "")
 				.replace(/{postUrl}/g, curl)
 				.replace(/{postTitle}/g, postTitle)
 				.replace(/{postAuthor}/g, author)
 				.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
+				.refresh(/{BlogUrl}/g, ThemeConfig.blog_url)
 				.replace(/{postDescription}/g, postDescription);
 				
 			if (window.clipboardData) {
@@ -136,7 +137,8 @@ const postContext = {
 						.replace(/{postTitle}/g, postTitle)
 						.replace(/{postAuthor}/g, postAuthor)
 						.replace(/{postDescription}/g, postDescription)
-						.replace(/{BlogTitle}/g, ThemeConfig.blog_title);
+						.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
+						.refresh(/{BlogUrl}/g, ThemeConfig.blog_url);
 
 					if (!/{postUrl}/.test(template)) { // 如果模版中没有{postUrl}变量，则需要追加文章链接
 						copyContent += ` ，文章链接: ${location.href}`;

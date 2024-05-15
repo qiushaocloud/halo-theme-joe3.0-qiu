@@ -1973,7 +1973,7 @@ spec:
               if: "$get(enable_copy_right_text).value === true"
               label: 自定义版权文案
               value: ""
-              help: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）【支持使用变量{postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}】"
+              help: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）【支持使用变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}、{BlogUrl}】"
             - $formkit: textarea
               name: passage_rights_content
               label: 许可协议文案
@@ -2051,7 +2051,7 @@ spec:
               if: "$get(enable_share_link).value === true"
               label: 复制文章链接内容模版
               value: ""
-              help: "自定义分享链接模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章『{postTitle}』，链接: {postUrl}"
+              help: "自定义分享链接模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}、{BlogTitle}、{BlogUrl}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章『{postTitle}』，链接: {postUrl}"
 
 
         - $formkit: group
