@@ -15,7 +15,7 @@
     <th:block th:if="${htmlType == 'index' && theme.config.carousel.enable_banner}">
         <script th:src="${source_link+'/assets/lib/swiper/swiper-bundle.min.js'}"></script>
     </th:block>
-    <th:block th:if="${htmlType == 'post'} and ${theme.config.post.enable_toc == true}">
+    <th:block th:if="${htmlType == 'post'} and ${theme.config.post.toc_group.enable_toc == true}">
         <script th:src="${source_link+'/assets/lib/tocbot/tocbot.min.js'}"></script>
     </th:block>
     <th:block th:if="${theme.config.other.enable_clean_mode != false && (htmlType =='post' || htmlType =='journals' || htmlType =='sheet')}">
