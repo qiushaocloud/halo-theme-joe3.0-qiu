@@ -96,7 +96,7 @@ const postContext = {
 				.replace(/{postTitle}/g, postTitle)
 				.replace(/{postAuthor}/g, author)
 				.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
-				.refresh(/{BlogUrl}/g, ThemeConfig.blog_url)
+				.replace(/{BlogUrl}/g, ThemeConfig.blog_url)
 				.replace(/{postDescription}/g, postDescription);
 				
 			if (window.clipboardData) {
@@ -138,7 +138,7 @@ const postContext = {
 						.replace(/{postAuthor}/g, postAuthor)
 						.replace(/{postDescription}/g, postDescription)
 						.replace(/{BlogTitle}/g, ThemeConfig.blog_title)
-						.refresh(/{BlogUrl}/g, ThemeConfig.blog_url);
+						.replace(/{BlogUrl}/g, ThemeConfig.blog_url);
 
 					if (!/{postUrl}/.test(template)) { // 如果模版中没有{postUrl}变量，则需要追加文章链接
 						copyContent += ` ，文章链接: ${location.href}`;
