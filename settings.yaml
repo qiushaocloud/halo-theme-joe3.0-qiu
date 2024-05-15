@@ -1882,11 +1882,11 @@ spec:
                   label: 是
                 - value: false
                   label: 否
-              - $formkit: text
-                name: toc_depth
-                label: TOC目录默认展开层级
-                value: "0"
-                help: "TOC目录自动展开的标题层级（1~6级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录"
+            - $formkit: text
+              name: toc_depth
+              label: TOC目录默认展开层级
+              value: "0"
+              help: "TOC目录自动展开的标题层级（1~6级标题，仅对有多级目录的文章生效），默认为 0，不展开子目录"
 
 
         - $formkit: select
