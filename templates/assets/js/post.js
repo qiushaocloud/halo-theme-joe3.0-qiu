@@ -135,7 +135,8 @@ const postContext = {
 					copyContent = template.replace(/{postUrl}/g, location.href)
 						.replace(/{postTitle}/g, postTitle)
 						.replace(/{postAuthor}/g, postAuthor)
-						.replace(/{postDescription}/g, postDescription);
+						.replace(/{postDescription}/g, postDescription)
+						.replace(/{BlogTitle}/g, ThemeConfig.blog_title);
 
 					if (!/{postUrl}/.test(template)) { // 如果模版中没有{postUrl}变量，则需要追加文章链接
 						copyContent += ` ，文章链接: ${location.href}`;
