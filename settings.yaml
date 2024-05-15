@@ -1936,13 +1936,6 @@ spec:
             - value: false
               label: 否
         
-        - $formkit: textarea
-          name: share_link_template
-          if: "$get(enable_share).value === true"
-          label: 复制文章链接内容模版
-          value: ""
-          help: "自定义分享链接模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章【{postTitle}】，链接: {postUrl}"
-
 
         - $formkit: select
           name: enable_copy
@@ -2042,6 +2035,13 @@ spec:
               label: 是
             - value: false
               label: 否
+        - $formkit: textarea
+          name: share_link_template
+          if: "$get(enable_share_link).value === true"
+          label: 复制文章链接内容模版
+          value: ""
+          help: "自定义分享链接模版，支持变量 {postUrl}、{postTitle}、{postAuthor}、{postDescription}，留空则使用默认模版(文章链接)，例如: 文章分享: {postAuthor} 发布了文章【{postTitle}】，链接: {postUrl}"
+
 
 
         - $formkit: textarea
