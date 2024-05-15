@@ -41,7 +41,7 @@
                         </a>
                     </th:block>
                     <th:block th:if="${theme.config.post.share_group.enable_share_weibo}">
-                        <a th:href="'http://service.weibo.com/share/share.php?sharesource=weibo&title=分享：'+${post.spec.title}+'，原文链接：'+${site_url}+${post.status.permalink}+'&pic='+${post.spec.cover}"
+                        <a th:href="'http://service.weibo.com/share/share.php?sharesource=weibo&title=分享：『'+${post.spec.title}+'』，作者：'+${post.owner.displayName}+'，原文链接：'+${site_url}+${post.status.permalink}+'&pic='+${post.spec.cover}"
                            target="_blank" rel="noopener noreferrer" title="分享到新浪微博">
                             <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="30"
                                  height="30">
