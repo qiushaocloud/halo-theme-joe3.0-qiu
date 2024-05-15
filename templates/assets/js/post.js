@@ -78,15 +78,24 @@ const postContext = {
 	initCopy() {
 		if (PageAttrs.metas_enable_copy === "false" || !ThemeConfig.enable_copy)
 			return;
+
 		const curl = location.href;
 		const author = $(".joe_detail").attr("data-author");
+		const postTitle = $(".joe_detail .joe_detail__title").text();
+
 		$(".joe_detail__article").on("copy", function (e) {
 			const selection = window.getSelection();
 			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
-			const appendLink = ThemeConfig.enable_copy_right_text
+
+			const appendLink = (ThemeConfig.enable_copy_right_text
 				? ThemeConfig.copy_right_text ||
-				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
-				: "";
+				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}\r\n文章标题： ${postTitle}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
+				: "")
+				.replace(/{postUrl}/g, curl)
+				.replace(/{postTitle}/g, postTitle)
+				.replace(/{postAuthor}/g, author)
+				.replace(/BlogTitle/g, ThemeConfig.blog_title);
+				
 			if (window.clipboardData) {
 				const copytext = selectionText + appendLink;
 				window.clipboardData.setData("Text", copytext);
