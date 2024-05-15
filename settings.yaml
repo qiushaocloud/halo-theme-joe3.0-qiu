@@ -1771,6 +1771,8 @@ spec:
               label: 是
             - value: false
               label: 否
+
+
         - $formkit: text
           name: post_author_link
           label: 文章页作者跳转链接
@@ -1789,31 +1791,31 @@ spec:
             - value: false
               label: 否
 
-
-        - $formkit: radio
-          name: enable_passage_tips
-          id: enable_passage_tips
-          label: 温馨提示
-          value: false
-          help: "是否展示文章页顶部的温馨提示"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-
-
-        - $formkit: textarea
-          if: "$get(enable_passage_tips).value"
-          name: passage_tips_content
-          label: 温馨提示文案
-          value: ""
-          help: "自定义温馨提示的文案，为空则使用默认文案，一般不用设置"
+        - $formkit: group
+          name: passage_tips_group
+          label: 温馨提示设置
+          children:
+            - $formkit: radio
+              name: enable_passage_tips
+              id: enable_passage_tips
+              label: 温馨提示
+              value: false
+              help: "是否展示文章页顶部的温馨提示"
+              options:
+                - value: true
+                  label: 是
+                - value: false
+                  label: 否
+            - $formkit: textarea
+              if: "$get(enable_passage_tips).value"
+              name: passage_tips_content
+              label: 温馨提示文案
+              value: ""
+              help: "自定义温馨提示的文案，为空则使用默认文案，一般不用设置"
 
 
         - $formkit: select
           name: post_img_align
-          id: post_img_align
           label: 图片对齐方式
           value: center
           help: "设置文章内容区域图片的对齐方式（默认为 “居中”，也可通过页面元数据 img_align 配置）"
@@ -1833,25 +1835,27 @@ spec:
           help: "设置文章内容区域图片的最大宽度，接受一切有效的宽度值，需带单位（默认为 100%，也可通过页面元数据 img_max_width 配置，但小屏幕下最大宽度会被强制设为 100%）"
 
 
-        - $formkit: radio
-          name: enable_progress_bar
-          id: enable_progress_bar
-          label: 启用文章浏览进度条
-          value: true
-          help: "文章页底部是否展示浏览进度条"
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-
-
-        - $formkit: textarea
-          if: "$get(enable_progress_bar).value === true"
-          name: progress_bar_bgc
-          label: 进度条背景色
-          value: ""
-          help: "浏览进度条的背景色，接受任何合法的颜色值（为空将使用默认背景色）"
+        - $formkit: group
+          name: progress_bar_group
+          label: 进度条设置
+          children:
+            - $formkit: radio
+              name: enable_progress_bar
+              id: enable_progress_bar
+              label: 启用文章浏览进度条
+              value: true
+              help: "文章页底部是否展示浏览进度条"
+              options:
+                - value: true
+                  label: 是
+                - value: false
+                  label: 否
+            - $formkit: textarea
+              if: "$get(enable_progress_bar).value === true"
+              name: progress_bar_bgc
+              label: 进度条背景色
+              value: ""
+              help: "浏览进度条的背景色，接受任何合法的颜色值（为空将使用默认背景色）"
 
 
         - $formkit: radio
@@ -1924,17 +1928,6 @@ spec:
               label: 是
             - value: false
               label: 否
-
-
-        - $formkit: select
-          name: enable_share
-          label: 文章分享
-          value: true
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         
 
         - $formkit: select
@@ -1992,8 +1985,19 @@ spec:
           name: share_group
           label: 分享设置
           children:
+            - $formkit: select
+              name: enable_share
+              id: enable_share
+              label: 文章分享
+              value: true
+              options:
+                - value: true
+                  label: 是
+                - value: false
+                  label: 否
             - $formkit: radio
               name: enable_share_weixin
+              if: "$get(enable_share).value === true"
               label: 微信分享
               value: true
               options:
@@ -2003,6 +2007,7 @@ spec:
                   label: 否
             - $formkit: radio
               name: enable_share_qq
+              if: "$get(enable_share).value === true"
               label: QQ分享
               value: true
               options:
@@ -2012,6 +2017,7 @@ spec:
                   label: 否
             - $formkit: radio
               name: enable_share_qzone
+              if: "$get(enable_share).value === true"
               label: QQ空间分享
               value: true
               options:
@@ -2021,6 +2027,7 @@ spec:
                   label: 否
             - $formkit: radio
               name: enable_share_weibo
+              if: "$get(enable_share).value === true"
               label: 微博分享
               value: true
               options:
@@ -2030,6 +2037,7 @@ spec:
                   label: 否
             - $formkit: radio
               name: enable_share_link
+              if: "$get(enable_share).value === true"
               id: enable_share_link
               label: 链接分享
               value: true

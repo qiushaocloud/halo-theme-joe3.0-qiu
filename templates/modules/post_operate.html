@@ -8,7 +8,7 @@
      </th:block>
 
   </div>
-    <th:block th:if="${theme.config.post.enable_share} and ${#annotations.get(post, 'enable_share')}">
+    <th:block th:if="${theme.config.post.share_group.enable_share} and ${#annotations.get(post, 'enable_share')}">
   <div class="joe_detail__operate-share">
     <i class="joe-font joe-icon-share"></i>
     <div class="share-icon-list">

@@ -66,7 +66,7 @@
       </th:block>
 
   <div class="joe_detail__overdue">
-    <th:block th:if="${#annotations.getOrDefault(post, 'enable_passage_tips' ,'true') == 'true'} and ${theme.config.post.enable_passage_tips}">
+    <th:block th:if="${#annotations.getOrDefault(post, 'enable_passage_tips' ,'true') == 'true'} and ${theme.config.post.passage_tips_group.enable_passage_tips}">
     <div class="joe_detail__overdue-wrapper">
       <div class="title">
         <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
@@ -77,10 +77,10 @@
         <span class="text">温馨提示：</span>
       </div>
       <div class="content">
-        <th:block th:if="${theme.config.post.passage_tips_content != null} and ${theme.config.post.passage_tips_content != ''}">
-          [[${theme.config.post.passage_tips_content}]]
+        <th:block th:if="${theme.config.post.passage_tips_group.passage_tips_content != null} and ${theme.config.post.passage_tips_group.passage_tips_content != ''}">
+          [[${theme.config.post.passage_tips_group.passage_tips_content}]]
         </th:block>
-        <th:block th:if="${theme.config.post.passage_tips_content == null} or ${theme.config.post.passage_tips_content == ''}">
+        <th:block th:if="${theme.config.post.passage_tips_group.passage_tips_content == null} or ${theme.config.post.passage_tips_group.passage_tips_content == ''}">
         本文最后更新于 [[${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}]]，若内容或图片失效，请留言反馈。部分素材来自网络，若不小心影响到您的利益，请联系我们删除。
         </th:block>
 
@@ -175,8 +175,8 @@
         <th:block th:replace="~{modules/common/aside_post :: aside_post}" />
 <!--      </th:block>-->
 </div>
-    <th:block th:if="${theme.config.post.enable_progress_bar}">
-<div class="joe_progress_bar" th:style="'background:'+${theme.config.post.progress_bar_bgc ?: ''}"></div>
+    <th:block th:if="${theme.config.post.progress_bar_group.enable_progress_bar}">
+<div class="joe_progress_bar" th:style="'background:'+${theme.config.post.progress_bar_group.progress_bar_bgc ?: ''}"></div>
 </th:block>
 <th:block th:if="${theme.config.post.enable_mobile_toc} or ${theme.config.theme.enable_back2top} or ${theme.config.basic.theme_mode == 'user'}">
   <th:block th:replace="~{modules/common/actions :: actions}" />
