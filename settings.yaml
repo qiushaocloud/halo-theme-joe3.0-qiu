@@ -1804,7 +1804,7 @@ spec:
 
 
         - $formkit: textarea
-#          if: "$get(enable_passage_tips).value"
+          if: "$get(enable_passage_tips).value"
           name: passage_tips_content
           label: 温馨提示文案
           value: ""
@@ -1975,7 +1975,7 @@ spec:
 
         - $formkit: textarea
           name: copy_right_text
-#          if: "$get(enable_copy_right_text).value === true"
+          if: "$get(enable_copy_right_text).value === true"
           label: 自定义版权文案
           value: ""
           help: "文章页复制内容时追加的自定义版权文字（如无特殊需要不建议设置，使用默认的即可。若真的要设置，请不要填写表情等特殊内容，否则可能导致网站崩溃）"
@@ -2045,40 +2045,38 @@ spec:
           help: "自定义文章页底部版权模块中的“作品采用”文案，为空则使用默认文案，一般不用设置"
 
 
-        - $formkit: radio
-          name: enable_donate
-          id: enable_donate
-          label: 开启打赏
-          value: false
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
-
-
-        - $formkit: attachment
-#          if: "$get(enable_donate).value === true"
-          name: qrcode_zfb
-          label: 支付宝二维码
-          value: ""
-          help: "打赏用的支付宝收款二维码链接，不填不显示"
-
-
-        - $formkit: attachment
-#          if: "$get(enable_donate).value === true"
-          name: qrcode_wx
-          label: 微信二维码
-          value: ""
-          help: "打赏用的微信收款二维码链接，不填不显示"
-
-
-        - $formkit: attachment
-#          if: "$get(enable_donate).value === true"
-          name: qrcode_qq
-          label: QQ二维码
-          value: ""
-          help: "打赏用的QQ收款二维码链接，不填不显示"
+        - $formkit: group
+          name: donate_group
+          label: 打赏设置
+          children:
+            - $formkit: radio
+              name: enable_donate
+              id: enable_donate
+              label: 开启打赏
+              value: false
+              options:
+                - value: true
+                  label: 是
+                - value: false
+                  label: 否
+            - $formkit: attachment
+              if: "$get(enable_donate).value === true"
+              name: qrcode_zfb
+              label: 支付宝二维码
+              value: ""
+              help: "打赏用的支付宝收款二维码链接，不填不显示"
+            - $formkit: attachment
+              if: "$get(enable_donate).value === true"
+              name: qrcode_wx
+              label: 微信二维码
+              value: ""
+              help: "打赏用的微信收款二维码链接，不填不显示"
+            - $formkit: attachment
+              if: "$get(enable_donate).value === true"
+              name: qrcode_qq
+              label: QQ二维码
+              value: ""
+              help: "打赏用的QQ收款二维码链接，不填不显示"
 
     - group: tags
       label: 标签页
