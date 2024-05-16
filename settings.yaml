@@ -2433,7 +2433,17 @@ spec:
           id: links_default_logo
           label: 友链默认 logo
           value: "/themes/theme-Joe3-qiu/assets/img/default_links_logo.png"
-          help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片（注意：主题优先使用后台配置的 logo，当后台未配置 logo 或 logo 加载出错才会用这里设置的图片。此处是有默认值的）"
+          help: "用于友链 logo 未设置或加载出错时显示的图片，设置为空，会随机根据当前博主名字随机生成一张首字符的渐变色图片"
+        - $formkit: select
+          name: enable_links_comment
+          label: 开启友链评论
+          value: true
+          help: "是否开启友链评论功能"
+          options:
+            - value: true
+              label: 是
+            - value: false
+              label: 否
         - $formkit: code
           name: links_article
           height: 200
