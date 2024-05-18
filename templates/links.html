@@ -24,12 +24,12 @@
             </span></h3>
             <th:block th:each="group : ${groups.?[spec.displayName != '']}">
             <!-- groups 通过 group.metadata.annotations.link_group_sort_seq 排序 -->
-            <div class="links-group" th:data-link-group-sort-seq="${group.metadata.annotations ?: (group.metadata.annotations.link_group_sort_seq ?: -1)}" >
+            <div class="links-group" th:data-link-group-sort-seq="${group.metadata.annotations ? (group.metadata.annotations.link_group_sort_seq ?: -1) : -1}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <th:block th:each="link : ${group.links}">
                 <!-- link 通过 link.metadata.annotations.link_sort_seq 排序 -->
-                <li class="joe_detail__friends-item" th:data-link-sort-seq="${link.metadata.annotations ?: (link.metadata.annotations.link_sort_seq ?: -1)}" >
+                <li class="joe_detail__friends-item" th:data-link-sort-seq="${link.metadata.annotations ? (link.metadata.annotations.link_sort_seq ?: -1) : -1}" >
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
                 >
