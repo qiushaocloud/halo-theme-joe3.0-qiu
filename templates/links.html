@@ -70,23 +70,23 @@
               linksGroupEles.sort((a, b) => {
                 const aSortSeq = parseInt($(a).data('link-group-sort-seq') || -1);
                 const bSortSeq = parseInt($(b).data('link-group-sort-seq') || -1);
-                return aSortSeq - bSortSeq; // link-group-sort-seq 数字越大越靠前
+                return bSortSeq - aSortSeq; // link-group-sort-seq 数字越大越靠前
               });
-              linksGroupEles.remove();
+              // linksGroupEles.remove();
               joeDetailArticle.append(linksGroupEles);
 
               linksGroupEles.each((_, linkGroupEle) => {
                 // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
-                const linksUlEle = linkGroupEle.find('.joe_detail__friends');
+                const linksUlEle = $(linkGroupEle).find('.joe_detail__friends');
                 const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
                 linksLiEles.sort((a, b) => {
                   const aSortSeq = parseInt($(a).data('link-sort-seq') || -1);
                   const bSortSeq = parseInt($(b).data('link-sort-seq') || -1);
-                  return aSortSeq - bSortSeq; // link-sort-seq 数字越大越靠前
+                  return bSortSeq - aSortSeq; // link-sort-seq 数字越大越靠前
                 });
-                linksLiEles.remove();
+                // linksLiEles.remove();
                 linksUlEle.append(linksLiEles);
-              }
+              });
             </script>
 
           </article>
