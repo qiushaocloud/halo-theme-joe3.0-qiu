@@ -24,12 +24,12 @@
             </span></h3>
             <th:block th:each="group : ${groups.?[spec.displayName != '']}">
             <!-- groups 通过 group.metadata.annotations.link_group_sort_seq 排序 -->
-            <div class="links-group" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',-1)}" >
+            <div class="links-group" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <th:block th:each="link : ${group.links}">
                 <!-- link 通过 link.metadata.annotations.link_sort_seq 排序 -->
-                <li class="joe_detail__friends-item" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',-1)}" >
+                <li class="joe_detail__friends-item" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
                 >
@@ -68,8 +68,8 @@
               const joeDetailArticle = $('#Joe .page-journals .joe_detail__article');
               const linksGroupEles = joeDetailArticle.find('.links-group');
               linksGroupEles.sort((a, b) => {
-                const aSortSeq = parseInt($(a).data('link-group-sort-seq') || -1);
-                const bSortSeq = parseInt($(b).data('link-group-sort-seq') || -1);
+                const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
+                const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
                 return bSortSeq - aSortSeq; // link-group-sort-seq 数字越大越靠前
               });
               // linksGroupEles.remove();
@@ -80,8 +80,8 @@
                 const linksUlEle = $(linkGroupEle).find('.joe_detail__friends');
                 const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
                 linksLiEles.sort((a, b) => {
-                  const aSortSeq = parseInt($(a).data('link-sort-seq') || -1);
-                  const bSortSeq = parseInt($(b).data('link-sort-seq') || -1);
+                  const aSortSeq = parseInt($(a).data('link-sort-seq') || 0);
+                  const bSortSeq = parseInt($(b).data('link-sort-seq') || 0);
                   return bSortSeq - aSortSeq; // link-sort-seq 数字越大越靠前
                 });
                 // linksLiEles.remove();
