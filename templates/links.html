@@ -81,8 +81,8 @@
                 }
 
                 // 若 link-group-sort-seq 为空, 则按创建时间排序
-                const aCreateTime = parseInt((a).data('link-group-create-time') || 0);
-                const bCreateTime = parseInt($(b).data('link-group-create-time') || 0);
+                const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
+                const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
                 return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
               });
               // linksGroupEles.remove();
@@ -108,8 +108,8 @@
                   }
 
                   // 若 link-sort-seq 为空, 则按创建时间排序
-                  const aCreateTime = parseInt($(a).data('link-create-time') || 0);
-                  const bCreateTime = parseInt($(b).data('link-create-time') || 0);
+                  const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
+                  const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
                   return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
                 });
                 // linksLiEles.remove();
