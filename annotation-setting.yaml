@@ -297,3 +297,20 @@ spec:
           label: 是
         - value: "false"
           label: 否
+
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: LinkGroup
+  formSchema:
+    - $formkit: "text"
+      name: "group_sort_seq"
+      label: "链接组排序，越大越靠前，如果不填，则不参与排序"
+      value: ""
