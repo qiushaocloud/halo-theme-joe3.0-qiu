@@ -311,6 +311,23 @@ spec:
     kind: LinkGroup
   formSchema:
     - $formkit: "text"
-      name: "group_sort_seq"
-      label: "链接组排序，越大越靠前，如果不填，则不参与排序"
+      name: "link_group_sort_seq"
+      label: "链接组排序序号，数字越大越靠前，如果不填，则不参与排序"
+      value: ""
+
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: Link
+  formSchema:
+    - $formkit: "text"
+      name: "link_sort_seq"
+      label: "同一组内链接排序序号，数字越大越靠前，如果不填，则不参与排序"
       value: ""
