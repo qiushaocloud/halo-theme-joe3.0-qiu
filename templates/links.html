@@ -23,12 +23,10 @@
 
             </span></h3>
             <th:block th:each="group : ${groups.?[spec.displayName != '']}">
-            <!-- groups 通过 group.metadata.annotations.link_group_sort_seq 排序 -->
             <div class="links-group" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <th:block th:each="link : ${group.links}">
-                <!-- link 通过 link.metadata.annotations.link_sort_seq 排序 -->
                 <li class="joe_detail__friends-item" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
@@ -70,7 +68,22 @@
               linksGroupEles.sort((a, b) => {
                 const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
                 const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
-                return bSortSeq - aSortSeq; // link-group-sort-seq 数字越大越靠前
+             
+                if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                  if (bSortSeq > 0 && aSortSeq > 0)
+                    return bSortSeq > aSortSeq ? 1 : -1; // link-group-sort-seq 数字越大越靠前
+
+                  if (bSortSeq > 0)
+                    return 1; // b.link-group-sort-seq 需要排在前面
+
+                  if (aSortSeq > 0)
+                    return -1; // a.link-group-sort-seq 需要排在前面
+                }
+
+                // 若 link-group-sort-seq 为空, 则按创建时间排序
+                const aCreateTime = parseInt((a).data('link-group-create-time') || 0);
+                const bCreateTime = parseInt($(b).data('link-group-create-time') || 0);
+                return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
               });
               // linksGroupEles.remove();
               joeDetailArticle.append(linksGroupEles);
@@ -82,7 +95,22 @@
                 linksLiEles.sort((a, b) => {
                   const aSortSeq = parseInt($(a).data('link-sort-seq') || 0);
                   const bSortSeq = parseInt($(b).data('link-sort-seq') || 0);
-                  return bSortSeq - aSortSeq; // link-sort-seq 数字越大越靠前
+
+                  if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                    if (bSortSeq > 0 && aSortSeq > 0)
+                      return bSortSeq > aSortSeq ? 1 : -1; // link-sort-seq 数字越大越靠前
+
+                    if (bSortSeq > 0)
+                      return 1; // b.link-sort-seq 需要排在前面
+
+                    if (aSortSeq > 0)
+                      return -1; // a.link-sort-seq 需要排在前面
+                  }
+
+                  // 若 link-sort-seq 为空, 则按创建时间排序
+                  const aCreateTime = parseInt($(a).data('link-create-time') || 0);
+                  const bCreateTime = parseInt($(b).data('link-create-time') || 0);
+                  return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
                 });
                 // linksLiEles.remove();
                 linksUlEle.append(linksLiEles);

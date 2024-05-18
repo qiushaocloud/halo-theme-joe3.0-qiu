@@ -312,8 +312,8 @@ spec:
   formSchema:
     - $formkit: "text"
       name: "link_group_sort_seq"
-      label: "链接组排序序号，数字越大越靠前，如果不填，则不参与排序"
-      value: ""
+      label: "链接组排序序号，数字越大越靠前，如果<=0，则按照创建时间升序"
+      value: "0"
 
 
 ---
@@ -329,5 +329,5 @@ spec:
   formSchema:
     - $formkit: "text"
       name: "link_sort_seq"
-      label: "同一组内链接排序序号，数字越大越靠前，如果不填，则不参与排序"
-      value: ""
+      label: "同一组内链接排序序号，数字越大越靠前，如果<=0，则按照创建时间升序"
+      value: "0"
