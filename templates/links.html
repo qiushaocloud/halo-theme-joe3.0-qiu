@@ -73,10 +73,9 @@
                 return aSortSeq - bSortSeq; // link-group-sort-seq 数字越大越靠前
               });
               linksGroupEles.remove();
-              
-              for(const linkGroupEle of linksGroupEles) {
-                joeDetailArticle.append(linkGroupEle);
+              joeDetailArticle.append(linksGroupEles);
 
+              linksGroupEles.each((_, linkGroupEle) => {
                 // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
                 const linksUlEle = linkGroupEle.find('.joe_detail__friends');
                 const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
@@ -86,9 +85,7 @@
                   return aSortSeq - bSortSeq; // link-sort-seq 数字越大越靠前
                 });
                 linksLiEles.remove();
-                for(const linkLiEle of linksLiEles) {
-                  linksUlEle.append(linkLiEle);
-                }
+                linksUlEle.append(linksLiEles);
               }
             </script>
 
