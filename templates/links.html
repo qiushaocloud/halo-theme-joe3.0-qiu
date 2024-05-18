@@ -62,6 +62,36 @@
               </ul>
             </div>
             </th:block>
+
+            <script>
+              // links-group 排序, link-group-sort-seq 数字越大越靠前
+              const joeDetailArticle = $('#Joe .page-journals .joe_detail__article');
+              const linksGroupEles = joeDetailArticle.find('.links-group');
+              linksGroupEles.sort((a, b) => {
+                const aSortSeq = parseInt($(a).data('link-group-sort-seq') || -1);
+                const bSortSeq = parseInt($(b).data('link-group-sort-seq') || -1);
+                return aSortSeq - bSortSeq; // link-group-sort-seq 数字越大越靠前
+              });
+              linksGroupEles.remove();
+              
+              for(const linkGroupEle of linksGroupEles) {
+                joeDetailArticle.append(linkGroupEle);
+
+                // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
+                const linksUlEle = linkGroupEle.find('.joe_detail__friends');
+                const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
+                linksLiEles.sort((a, b) => {
+                  const aSortSeq = parseInt($(a).data('link-sort-seq') || -1);
+                  const bSortSeq = parseInt($(b).data('link-sort-seq') || -1);
+                  return aSortSeq - bSortSeq; // link-sort-seq 数字越大越靠前
+                });
+                linksLiEles.remove();
+                for(const linkLiEle of linksLiEles) {
+                  linksUlEle.append(linkLiEle);
+                }
+              }
+            </script>
+
           </article>
           <article class="joe_detail__article animated fadeIn">
             <h3>申请格式</h3>
