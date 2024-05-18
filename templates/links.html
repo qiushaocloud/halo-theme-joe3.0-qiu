@@ -22,10 +22,14 @@
             <h3>友链列表<span class="totals" >
 
             </span></h3>
-            <div class="links-group" th:each="group : ${groups.?[spec.displayName != '']}">
+            <th:block th:each="group : ${groups.?[spec.displayName != '']}">
+            <!-- groups 通过 group.metadata.annotations.link_group_sort_seq 排序 -->
+            <div class="links-group" th:data-link-group-sort-seq="${group.metadata.annotations.link_group_sort_seq ?: -1}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
-                <li class="joe_detail__friends-item" th:each="link : ${group.links}">
+                <th:block th:each="link : ${group.links}">
+                <!-- link 通过 link.metadata.annotations.link_sort_seq 排序 -->
+                <li class="joe_detail__friends-item" th:data-link-sort-seq="${link.metadata.annotations.link_sort_seq ?: -1}" ></li>>
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
                 >
@@ -54,8 +58,10 @@
                   </a>
                 </th:block>
                 </li>
+                </th:block>
               </ul>
             </div>
+            </th:block>
           </article>
           <article class="joe_detail__article animated fadeIn">
             <h3>申请格式</h3>
