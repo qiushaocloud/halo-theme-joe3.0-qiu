@@ -18,7 +18,7 @@
         <th:block th:with="stats = ${siteStatsFinder.getStats()}">
             [[${theme.config.blogger.nickname ?: site.title}]]
             <img class="level"
-                th:if="${theme.config.blogger.enable_show_level}"
+                th:if="${theme.config.blogger.level_group.enable_show_level}"
                 th:src="@{/assets/img/transparent-placeholder.png}"
                 alt="博主等级"
                 onload="this.onload = null; this.src=`/themes/theme-Joe3-qiu/assets/svg/level_${Joe.calcBlogAuthorLevel(this)}.svg`"
