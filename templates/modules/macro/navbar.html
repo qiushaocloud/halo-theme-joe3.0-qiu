@@ -143,7 +143,7 @@
                   th:if="${theme.config.blogger.enable_show_level}"
                   th:src="@{/assets/img/transparent-placeholder.png}"
                   alt="博主等级"
-                  onload="this.onload = null; this.src=`@{/assets/svg/level_${Joe.calcBlogAuthorLevel(this)}.svg}`"
+                  onload="this.onload = null; this.src=`/themes/theme-Joe3-qiu/assets/svg/level_${Joe.calcBlogAuthorLevel(this)}.svg`"
                   th:data-stats-visit="${stats.visit}"
                   th:data-stats-upvote="${stats.upvote}"
                   th:data-stats-comment="${stats.comment}"
