@@ -1045,7 +1045,7 @@ spec:
           # if: "$get(enable_show_level).value === true"
           label: 等级计算公式模版，等级范围为0-6
           value: ""
-          help: "用于计算等级的公式，会使用 eval 进行计算，支持变量【{statsVisit}:访问数量，{statsUpvote}:点赞数量，{statsComment}:评论数量，{statsPost}:文章数量，/{statsCategory}:分类数量】，缺省则使用默认模版: Math.floor((Math.min({statsPost}/300, 0.5) + Math.min({statsComment}/500, 0.2) + Math.min({statsUpvote}/500, 0.15) + Math.min({statsVisit}/150000, 0.15)) * 6)"
+          help: "用于计算等级的公式，会使用 eval 进行计算，支持变量【{statsVisit}:访问数量，{statsUpvote}:点赞数量，{statsComment}:评论数量，{statsPost}:文章数量，/{statsCategory}:分类数量】，缺省则使用默认模版: Math.floor((Math.min(({statsPost}/300)*0.5, 0.5) + Math.min(({statsComment}/500)*0.2, 0.2) + Math.min(({statsUpvote}/500)*0.15, 0.15) + Math.min(({statsVisit}/150000)*0.15, 0.15)) * 6)"
         - $formkit: attachment
           name: author_bg
           label: 博主栏背景图
