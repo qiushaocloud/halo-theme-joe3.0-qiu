@@ -23,11 +23,11 @@
 
             </span></h3>
             <th:block th:each="group : ${groups.?[spec.displayName != '']}">
-            <div class="links-group" th:if="${#annotations.getOrDefault(group,'link_group_enable_show',true)}" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
+            <div class="links-group" th:if="${#annotations.getOrDefault(group,'link_group_enable_show',true)}" th:data-link-group-default-sort="${#annotations.getOrDefault(group,'link_group_default_sort','')}" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <th:block th:each="link : ${group.links}">
-                <li class="joe_detail__friends-item" th:if="${#annotations.getOrDefault(link,'link_enable_show',true)}" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
+                <li class="joe_detail__friends-item" th:if="${#annotations.getOrDefault(link,'link_enable_show',true)}" th:data-link-default-sort="${#annotations.getOrDefault(link,'link_default_sort','')}" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
                 >
@@ -82,10 +82,19 @@
                       return -1; // a.link-group-sort-seq 需要排在前面
                   }
 
-                  // 若 link-group-sort-seq 为空, 则按创建时间排序
-                  const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
-                  const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
-                  return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
+                  // 若 link-group-sort-seq <= 0, 则按默认排序方式进行排序
+                  const aDefaultSort = $(a).data('link-group-default-sort') || '';
+                  const bDefaultSort = $(b).data('link-group-default-sort') || '';
+                  if (aDefaultSort !== bDefaultSort)
+                    return 0; // 若 link-group-default-sort 不相同, 则不排序
+
+                    const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
+                    const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
+                  if (aDefaultSort === 'link_create_time_asc' || aDefaultSort === 'link_create_time_desc') { // 按照创建时间升序/降序排序
+                    return aDefaultSort === 'link_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
+                  }
+
+                  return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
                 });
                 // linksGroupEles.remove();
                 joeDetailArticle.append(linksGroupEles);
@@ -109,10 +118,20 @@
                         return -1; // a.link-sort-seq 需要排在前面
                     }
 
-                    // 若 link-sort-seq 为空, 则按创建时间排序
-                    const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
-                    const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
-                    return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
+                    // 若 link-sort-seq <= 0, 则按默认排序方式进行排序
+                    const aDefaultSort = $(a).data('link-default-sort') || '';
+                    const bDefaultSort = $(b).data('link-default-sort') || '';
+
+                    if (aDefaultSort !== bDefaultSort)
+                      return 0; // 若 link-default-sort 不相同, 则不排序
+                    
+                    if (aDefaultSort === 'link_create_time_asc' || aDefaultSort === 'link_create_time_desc') { // 按照创建时间升序/降序排序
+                      const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
+                      const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
+                      return aDefaultSort === 'link_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
+                    }
+
+                    return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
                   });
                   // linksLiEles.remove();
                   linksUlEle.append(linksLiEles);

@@ -312,8 +312,19 @@ spec:
   formSchema:
     - $formkit: "text"
       name: "link_group_sort_seq"
-      label: "链接组排序序号，数字越大越靠前，如果<=0，则按照创建时间升序"
+      label: "链接组排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
       value: "0"
+    - $formkit: "select"
+      name: "link_group_default_sort"
+      label: "默认排序方式"
+      value: "link_group_create_time_asc"
+      options:
+        - value: "link_group_create_time_asc"
+          label: 按照创建时间升序
+        - value: "link_group_create_time_desc"
+          label: 按照创建时间降序
+        - value: "link_group_keep_origin_sort"
+          label: 保持原有顺序【即:友链组件原本的排序方式】
     - $formkit: "select"
       name: "link_group_enable_show"
       label: "是否显示"
@@ -338,8 +349,19 @@ spec:
   formSchema:
     - $formkit: "text"
       name: "link_sort_seq"
-      label: "同一组内链接排序序号，数字越大越靠前，如果<=0，则按照创建时间升序"
+      label: "同一组内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
       value: "0"
+    - $formkit: "select"
+      name: "link_default_sort"
+      label: "默认排序方式"
+      value: "link_create_time_asc"
+      options:
+        - value: "link_create_time_asc"
+          label: 按照创建时间升序
+        - value: "link_create_time_desc"
+          label: 按照创建时间降序
+        - value: "link_keep_origin_sort"
+          label: 保持原有顺序【即:友链组件原本的排序方式】
     - $formkit: "select"
       name: "link_enable_show"
       label: "是否显示"
