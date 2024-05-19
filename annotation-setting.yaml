@@ -312,7 +312,7 @@ spec:
   formSchema:
     - $formkit: "text"
       name: "link_group_sort_seq"
-      label: "链接组排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
+      label: "链接分类排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
       value: "0"
     - $formkit: "select"
       name: "link_group_default_sort"
@@ -349,7 +349,7 @@ spec:
   formSchema:
     - $formkit: "text"
       name: "link_sort_seq"
-      label: "同一组内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
+      label: "同一分类内链接排序序号，数字越大越靠前，如果<=0，则按照默认排序方式进行排序"
       value: "0"
     - $formkit: "select"
       name: "link_default_sort"
