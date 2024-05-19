@@ -15,7 +15,20 @@
         </th:block>
     </div>
     <a class="link" th:href="${site.url}" target="_blank" rel="noopener noreferrer nofollow">
-        [[${theme.config.blogger.nickname ?: site.title}]]<img class="level" th:src="@{/assets/svg/level_1.svg}"  alt="博主等级">
+        <th:block th:with="stats = ${siteStatsFinder.getStats()}">
+            [[${theme.config.blogger.nickname ?: site.title}]]
+            <img class="level"
+                th:if="${theme.config.blogger.level_icon != '0'}"
+                th:src="@{/assets/img/transparent-placeholder.png}"
+                alt="博主等级"
+                onload="() => `@{/assets/svg/level_${Joe.calcBlogAuthorLevel(this)}.svg}`"
+                th:data-stats-visit="${stats.visit}"
+                th:data-stats-upvote="${stats.upvote}"
+                th:data-stats-comment="${stats.comment}"
+                th:data-stats-post="${stats.post}"
+                th:data-stats-category="${stats.category}"
+            >
+        </th:block>
     </a>
     <th:block th:if="${theme.config.blogger.motto != ''}">
     <p class="motto joe_motto">[[${theme.config.blogger.motto}]]</p>

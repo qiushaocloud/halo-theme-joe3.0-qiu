@@ -309,6 +309,64 @@
 
             // 返回生成的图片对象 base64 编码
             return canvas.toDataURL();
+        },
+        /** 计算博主等级 */
+        calcBlogAuthorLevel: function (siteStatsVoStrOrElement) {
+            // SiteStatsVo = {
+            //     "visit": 0,   // 访问数量
+            //     "upvote": 0,  // 点赞数量
+            //     "comment": 0, // 评论数量
+            //     "post": 0,    // 文章数量
+            //     "category": 0 // 分类数量
+            // }
+            try {
+                let siteStatsVo;
+                if (typeof siteStatsVoStrOrElement === 'string') {
+                    siteStatsVo = JSON.parse(siteStatsVoStrOrElement);
+                } else if (siteStatsVoStrOrElement instanceof HTMLElement) {
+                    const visit = siteStatsVoStrOrElement.dataset.statsVisit || 0;
+                    const upvote = siteStatsVoStrOrElement.dataset.statsUpvote || 0;
+                    const comment = siteStatsVoStrOrElement.dataset.statsComment || 0;
+                    const post = siteStatsVoStrOrElement.dataset.statsPost || 0;
+                    const category = siteStatsVoStrOrElement.dataset.statsCategory || 0;
+                    siteStatsVo = {
+                        "visit": parseInt(visit),
+                        "upvote": parseInt(upvote),
+                        "comment": parseInt(comment),
+                        "post": parseInt(post),
+                        "category": parseInt(category)
+                    };
+                } else {
+                    console.error('calcBlogAuthorLevel 参数类型错误, siteStatsVoStrOrElement:', siteStatsVoStrOrElement);
+                    return 0;
+                }
+
+                console.log('calcBlogAuthorLevel siteStatsVo:', siteStatsVo)
+                let calcLevelTemplate = '[[${theme.config.blogger.calc_level_template}]]'; // 计算等级的算法模版
+                if (!calcLevelTemplate) {
+                    // 默认算法：文章数量/300(最高占比50%) + 评论数量/500(最高占比20%) + 点赞数量/500(最高占比15%) + 访问数量/150000(最高占比15%)
+                    calcLevelTemplate = 'Math.floor((Math.min(SiteStats.post}/300, 0.5) + Math.min({SiteStats.comment}/500, 0.2) + Math.min({SiteStats.upvote}/500, 0.15) + Math.min({SiteStats.visit}/150000, 0.15)) * 6)';
+                }
+
+                calcLevelTemplate = calcLevelTemplate
+                    .replace(/{statsVisit}/g, siteStatsVo.visit)
+                    .replace(/{statsUpvote}/g, siteStatsVo.upvote)
+                    .replace(/{statsComment}/g, siteStatsVo.comment)
+                    .replace(/{statsPost}/g, siteStatsVo.post)
+                    .replace(/{statsCategory}/g, siteStatsVo.category);
+
+                const level = eval(calcLevelTemplate);
+                if (typeof level !== 'number' || isNaN(level) || level < 0)
+                    return 0; // 等级不能为负数
+
+                if (level > 6)
+                    return 6; // 等级不能超过 6
+
+                return parseInt(level); // 等级范围 0-6
+            } catch (e) {
+                console.error('Joe3主题配置：站点统计数据解析失败，无法计算博主等级。siteStatsVoStr:', siteStatsVoStr, ' ,error:', e);
+                return 0;
+            }
         }
     }
     ThemeConfig.enable_console_theme && console.log("%cTheme By  Jiewen" + " | 版本 V" + ThemeConfig.version, "padding: 8px 15px;color:#fff;background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3);border-radius: 0 15px 0 15px;");
