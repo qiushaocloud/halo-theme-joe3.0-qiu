@@ -23,11 +23,11 @@
 
             </span></h3>
             <th:block th:each="group : ${groups.?[spec.displayName != '']}">
-            <div class="links-group" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
+            <div class="links-group" th:if="${#annotations.getOrDefault(group,'link_group_enable_show',true)}" th:data-link-group-sort-seq="${#annotations.getOrDefault(group,'link_group_sort_seq',0)}" th:data-link-group-create-time="${group.metadata.creationTimestamp}" >
               <h5>[[${group.spec.displayName}]]</h5>
               <ul class="joe_detail__friends evan-friends">
                 <th:block th:each="link : ${group.links}">
-                <li class="joe_detail__friends-item" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
+                <li class="joe_detail__friends-item" th:if="${#annotations.getOrDefault(link,'link_enable_show',true)}" th:data-link-sort-seq="${#annotations.getOrDefault(link,'link_sort_seq',0)}" th:data-link-create-time="${link.metadata.creationTimestamp}" >
                 <th:block
                   th:with="randomBgColor = ${bgColorArray[#numbers.formatDecimal(T(java.lang.Math).floor(T(java.lang.Math).random()* bgColorArray.length),1,0)]}"
                 >
