@@ -62,59 +62,62 @@
             </th:block>
 
             <script>
-              // links-group 排序, link-group-sort-seq 数字越大越靠前
-              const joeDetailArticle = $('#Joe .page-journals .joe_detail__article');
-              const linksGroupEles = joeDetailArticle.find('.links-group');
-              linksGroupEles.sort((a, b) => {
-                const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
-                const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
-             
-                if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
-                  if (bSortSeq > 0 && aSortSeq > 0)
-                    return bSortSeq > aSortSeq ? 1 : -1; // link-group-sort-seq 数字越大越靠前
-
-                  if (bSortSeq > 0)
-                    return 1; // b.link-group-sort-seq 需要排在前面
-
-                  if (aSortSeq > 0)
-                    return -1; // a.link-group-sort-seq 需要排在前面
-                }
-
-                // 若 link-group-sort-seq 为空, 则按创建时间排序
-                const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
-                const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
-                return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
-              });
-              // linksGroupEles.remove();
-              joeDetailArticle.append(linksGroupEles);
-
-              linksGroupEles.each((_, linkGroupEle) => {
-                // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
-                const linksUlEle = $(linkGroupEle).find('.joe_detail__friends');
-                const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
-                linksLiEles.sort((a, b) => {
-                  const aSortSeq = parseInt($(a).data('link-sort-seq') || 0);
-                  const bSortSeq = parseInt($(b).data('link-sort-seq') || 0);
-
+              // TODO qiushaocloud 最好的办法就是在上面直接排序，我对 thymeleaf 语法不熟悉，尝试使用了 #lists.sort，但一直报错，因此改成了 js 排序，希望有能力的大佬帮忙优化一下
+              (() => {
+                // links-group 排序, link-group-sort-seq 数字越大越靠前
+                const joeDetailArticle = $('#Joe .page-journals .joe_detail__article');
+                const linksGroupEles = joeDetailArticle.find('.links-group');
+                linksGroupEles.sort((a, b) => {
+                  const aSortSeq = parseInt($(a).data('link-group-sort-seq') || 0);
+                  const bSortSeq = parseInt($(b).data('link-group-sort-seq') || 0);
+              
                   if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
                     if (bSortSeq > 0 && aSortSeq > 0)
-                      return bSortSeq > aSortSeq ? 1 : -1; // link-sort-seq 数字越大越靠前
+                      return bSortSeq > aSortSeq ? 1 : -1; // link-group-sort-seq 数字越大越靠前
 
                     if (bSortSeq > 0)
-                      return 1; // b.link-sort-seq 需要排在前面
+                      return 1; // b.link-group-sort-seq 需要排在前面
 
                     if (aSortSeq > 0)
-                      return -1; // a.link-sort-seq 需要排在前面
+                      return -1; // a.link-group-sort-seq 需要排在前面
                   }
 
-                  // 若 link-sort-seq 为空, 则按创建时间排序
-                  const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
-                  const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
+                  // 若 link-group-sort-seq 为空, 则按创建时间排序
+                  const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
+                  const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
                   return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
                 });
-                // linksLiEles.remove();
-                linksUlEle.append(linksLiEles);
-              });
+                // linksGroupEles.remove();
+                joeDetailArticle.append(linksGroupEles);
+
+                linksGroupEles.each((_, linkGroupEle) => {
+                  // links-group 内的 links 排序, link-sort-seq 数字越大越靠前
+                  const linksUlEle = $(linkGroupEle).find('.joe_detail__friends');
+                  const linksLiEles = linksUlEle.find('.joe_detail__friends-item');
+                  linksLiEles.sort((a, b) => {
+                    const aSortSeq = parseInt($(a).data('link-sort-seq') || 0);
+                    const bSortSeq = parseInt($(b).data('link-sort-seq') || 0);
+
+                    if (!isNaN(bSortSeq) && !isNaN(aSortSeq)) {
+                      if (bSortSeq > 0 && aSortSeq > 0)
+                        return bSortSeq > aSortSeq ? 1 : -1; // link-sort-seq 数字越大越靠前
+
+                      if (bSortSeq > 0)
+                        return 1; // b.link-sort-seq 需要排在前面
+
+                      if (aSortSeq > 0)
+                        return -1; // a.link-sort-seq 需要排在前面
+                    }
+
+                    // 若 link-sort-seq 为空, 则按创建时间排序
+                    const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
+                    const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
+                    return aCreateTime > bCreateTime ? 1 : -1; // 最近创建的在后面
+                  });
+                  // linksLiEles.remove();
+                  linksUlEle.append(linksLiEles);
+                });
+              })();
             </script>
 
           </article>
