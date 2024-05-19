@@ -1031,7 +1031,7 @@ spec:
           help: "头像随机生成配置项，格式：{bgColor: '', textColor: 'var(--theme)', useTextGradient: false}，默认情况使用随机渐变色背景和文字，如需自定义请修改此处【useTextGradient:当textColor为空时是否使用文字渐变色，默认为false】"
         - $formkit: radio
           name: enable_show_level
-          id: enable_show_level
+          # id: enable_show_level
           label: 展示博主等级
           value: true
           help: "博主等级基于定义的等级计算公式模版计算得到"
@@ -1044,7 +1044,7 @@ spec:
           name: calc_level_template
           # if: "$get(enable_show_level).value === true"
           label: 等级计算公式模版，等级范围为0-6
-          value: "等级：{level}，经验：{experience}，积分：{score}"
+          value: ""
           help: "用于计算等级的公式，会使用 eval 进行计算，支持变量【{statsVisit}:访问数量，{statsUpvote}:点赞数量，{statsComment}:评论数量，{statsPost}:文章数量，/{statsCategory}:分类数量】，缺省则使用默认模版: Math.floor((Math.min(SiteStats.post}/300, 0.5) + Math.min({SiteStats.comment}/500, 0.2) + Math.min({SiteStats.upvote}/500, 0.15) + Math.min({SiteStats.visit}/150000, 0.15)) * 6)"
         - $formkit: attachment
           name: author_bg

@@ -18,10 +18,10 @@
         <th:block th:with="stats = ${siteStatsFinder.getStats()}">
             [[${theme.config.blogger.nickname ?: site.title}]]
             <img class="level"
-                th:if="${theme.config.blogger.level_icon != '0'}"
+                th:if="${theme.config.blogger.enable_show_level}"
                 th:src="@{/assets/img/transparent-placeholder.png}"
                 alt="博主等级"
-                onload="() => `@{/assets/svg/level_${Joe.calcBlogAuthorLevel(this)}.svg}`"
+                onload="() => {this.onload = null; this.src=`@{/assets/svg/level_${Joe.calcBlogAuthorLevel(this)}.svg}`}"
                 th:data-stats-visit="${stats.visit}"
                 th:data-stats-upvote="${stats.upvote}"
                 th:data-stats-comment="${stats.comment}"
