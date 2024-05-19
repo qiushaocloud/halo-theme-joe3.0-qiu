@@ -1042,7 +1042,7 @@ spec:
               label: 关闭
         - $formkit: text
           name: calc_level_template
-          if: "$get(enable_show_level).value === true"
+          # if: "$get(enable_show_level).value === true"
           label: 等级计算公式模版，等级范围为0-6
           value: "等级：{level}，经验：{experience}，积分：{score}"
           help: "用于计算等级的公式，会使用 eval 进行计算，支持变量【{statsVisit}:访问数量，{statsUpvote}:点赞数量，{statsComment}:评论数量，{statsPost}:文章数量，/{statsCategory}:分类数量】，缺省则使用默认模版: Math.floor((Math.min(SiteStats.post}/300, 0.5) + Math.min({SiteStats.comment}/500, 0.2) + Math.min({SiteStats.upvote}/500, 0.15) + Math.min({SiteStats.visit}/150000, 0.15)) * 6)"
