@@ -22,6 +22,19 @@
       width: 100%;
       height: 100%;
     }
+
+    /* 在全屏模式下应用的样式 */
+    .dplayer-controller .dplayer-icons .dplayer-full:hover .dplayer-full-in-icon {
+      display: none;
+    }
+
+    .fullscreen-body .dplayer-controller .dplayer-icons .dplayer-full .dplayer-full-in-icon {
+      display: block;
+    }
+
+    .fullscreen-body .dplayer-controller .dplayer-icons .dplayer-full .dplayer-full-icon {
+      display: none;
+    }
   </style>
 </head>
 
@@ -60,6 +73,15 @@
     }
     return key ? params[key] : params;
   }
+
+  // 检测全屏状态的改变
+  document.addEventListener("fullscreenchange", function () {
+    if (document.fullscreenElement) {
+      document.body.classList.add('fullscreen-body');
+    } else {
+      document.body.classList.remove('fullscreen-body');
+    }
+  });
 
   new DPlayer({
     container: document.getElementById('dplayer'), // 播放器容器元素
