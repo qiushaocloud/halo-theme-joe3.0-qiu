@@ -346,8 +346,8 @@
                 console.log('calcBlogAuthorLevel siteStatsVo:', siteStatsVo)
                 let calcLevelTemplate = '[[${theme.config.blogger.calc_level_template}]]'; // 计算等级的算法模版
                 if (!calcLevelTemplate) {
-                    // 默认算法：文章数量/300(最高占比50%) + 评论数量/500(最高占比20%) + 点赞数量/500(最高占比15%) + 访问数量/150000(最高占比15%)
-                    calcLevelTemplate = 'Math.floor((Math.min(({statsPost}/300)*0.5, 0.5) + Math.min(({statsComment}/500)*0.2, 0.2) + Math.min(({statsUpvote}/500)*0.15, 0.15) + Math.min(({statsVisit}/150000)*0.15, 0.15)) * 6)';
+                    // 默认算法：文章数量/120(最高占比60%) + 评论数量/150(最高占比15%) + 点赞数量/150(最高占比10%) + 访问数量/60000(最高占比15%)
+                    calcLevelTemplate = 'Math.floor((Math.min(({statsPost}/120)*0.6, 0.6) + Math.min(({statsComment}/150)*0.15, 0.15) + Math.min(({statsUpvote}/150)*0.1, 0.1) + Math.min(({statsVisit}/60000)*0.15, 0.15)) * 6)';
                 }
 
                 calcLevelTemplate = calcLevelTemplate
