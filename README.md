@@ -47,7 +47,7 @@
 20. 友链支持评论区是否显示
 21. 支持 comment-widget 进行图片上传，不需要修改 comment-widget 源代码，在主题中控制 comment-widget 的样式和逻辑【暂未实现】
 22. 图库逻辑和样式优化，添加动画效果及图片信息展示，参考 Joe2.0 主题【暂未实现】
-23. 等级支持自定义计算规则【暂未实现】
+23. 支持博主等级是否显示，并支持等级计算公式模版进行计算等级
 
 ### 等待修复的bug
 * [mac command + C 复制文章内容时，会直接选中其它内容](https://github.com/jiewenhuang/halo-theme-joe3.0/issues/269)
