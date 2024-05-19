@@ -85,10 +85,10 @@
                   }
 
                   // 若 link-group-sort-seq <= 0, 则按默认排序方式进行排序
-                  if (linksGroupDefaultSort === 'link_create_time_asc' || linksGroupDefaultSort === 'link_create_time_desc') { // 按照创建时间升序/降序排序
+                  if (linksGroupDefaultSort === 'links_group_create_time_asc' || linksGroupDefaultSort === 'links_group_create_time_desc') { // 按照创建时间升序/降序排序
                     const aCreateTime = parseInt(new Date($(a).data('link-group-create-time')).getTime() || 0);
                     const bCreateTime = parseInt(new Date($(b).data('link-group-create-time')).getTime() || 0);
-                    return linksGroupDefaultSort === 'link_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
+                    return linksGroupDefaultSort === 'links_group_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
                   }
 
                   return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
@@ -116,10 +116,10 @@
                     }
 
                     // 若 link-sort-seq <= 0, 则按默认排序方式进行排序
-                    if (linksDefaultSort === 'link_create_time_asc' || linksDefaultSort === 'link_create_time_desc') { // 按照创建时间升序/降序排序
+                    if (linksDefaultSort === 'links_create_time_asc' || linksDefaultSort === 'links_create_time_desc') { // 按照创建时间升序/降序排序
                       const aCreateTime = parseInt(new Date($(a).data('link-create-time')).getTime() || 0);
                       const bCreateTime = parseInt(new Date($(b).data('link-create-time')).getTime() || 0);
-                      return linksDefaultSort === 'link_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
+                      return linksDefaultSort === 'links_create_time_asc' ? (aCreateTime > bCreateTime ? 1 : -1) : (aCreateTime < bCreateTime ? 1 : -1);
                     }
 
                     return 0; // 不进行排序，保持原有顺序【即:友链组件原本的排序方式】
