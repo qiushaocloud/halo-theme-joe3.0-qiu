@@ -53,6 +53,7 @@
 * [mac command + C 复制文章内容时，会直接选中其它内容](https://github.com/jiewenhuang/halo-theme-joe3.0/issues/269)
 * [设置了”自定义-外部CSS链接“没有效果，页面中没有引入css文件](https://github.com/jiewenhuang/halo-theme-joe3.0/issues/252)
 * [设置了 “后台-设置-代码注入-页脚”，但是在主题页面中并没有注入到页脚](https://github.com/jiewenhuang/halo-theme-joe3.0/issues/251)
+* pad上横屏时文章目录没显示内容
 
 <hr />
 
