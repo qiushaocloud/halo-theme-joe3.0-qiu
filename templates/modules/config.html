@@ -65,6 +65,37 @@
     window.Joe = {
         BASE_API: "",
         isMobile: /windows phone|iphone|android/gi.test(window.navigator.userAgent),
+        getLoginedUserInfo: function() {
+            /**
+            ContributorVo = {
+                "name": "string",                                   // 用户名
+                "displayName": "string",                            // 显示名称
+                "avatar": "string",                                 // 头像
+                "bio": "string",                                    // 描述
+                "permalink": "string"                               // 作者的文章归档页面链接
+            }
+            */
+            let username = "[[${#authentication.name}]]";
+            let displayName = "游客";
+            let avatar = "";
+            let bio = "";
+            let permalink = "";
+
+            if (username && username !== 'anonymousUser') {
+                displayName = "[[contributorFinder.getContributor(#authentication.name).displayName}]]";
+                avatar = "[[contributorFinder.getContributor(#authentication.name).avatar}]]";
+                bio = "[[contributorFinder.getContributor(#authentication.name).bio}]]";
+                permalink = "[[contributorFinder.getContributor(#authentication.name).permalink}]]";
+            }
+
+            return {
+                username: username,
+                displayName: displayName,
+                avatar: avatar,
+                bio: bio,
+                permalink: permalink
+            };
+        },
         bloggerGenerateAvatarOpts: (function() {
             let generateAvatarOpts = {};
             let generate_avatar_opts_str = '[[${theme.config.blogger.generate_avatar_opts}]]';
