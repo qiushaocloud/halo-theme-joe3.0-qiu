@@ -76,17 +76,10 @@
             }
             */
             let username = "[[${#authentication.name}]]";
-            let displayName = "游客";
-            let avatar = "";
-            let bio = "";
-            let permalink = "";
-
-            if (username && username !== 'anonymousUser') {
-                displayName = "[[contributorFinder.getContributor(#authentication.name).displayName}]]";
-                avatar = "[[contributorFinder.getContributor(#authentication.name).avatar}]]";
-                bio = "[[contributorFinder.getContributor(#authentication.name).bio}]]";
-                permalink = "[[contributorFinder.getContributor(#authentication.name).permalink}]]";
-            }
+            let displayName = "[[${#authentication.name == 'anonymousUser' ? '游客' : contributorFinder.getContributor(#authentication.name).displayName}]]";
+            let avatar = "[[${#authentication.name == 'anonymousUser' ? '' : contributorFinder.getContributor(#authentication.name).avatar}]]";
+            let bio = "[[${#authentication.name == 'anonymousUser' ? '' : contributorFinder.getContributor(#authentication.name).bio}]]";
+            let permalink = "[[${#authentication.name == 'anonymousUser' ? '' : contributorFinder.getContributor(#authentication.name).permalink}]]";
 
             return {
                 username: username,
