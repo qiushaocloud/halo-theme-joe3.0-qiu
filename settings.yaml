@@ -2882,6 +2882,11 @@ spec:
             - value: false
               label: 关闭
         - $formkit: text
+          name: baidu_collect_api_host
+          label: 百度收录 API Host
+          value: "https://bbchin.com"
+          help: "请求百度收录相关接口，默认为 https://bbchin.com【注：如果接口出现因为证书问题请求不了，这里可以填入代理的 host】"
+        - $formkit: text
           name: baidu_token
           label: 百度推送Token
           value: ""
