@@ -3,7 +3,7 @@
     "use strict";
     const EvanBigBanner = function(options) {
         if (!(this instanceof EvanBigBanner)) { return new EvanBigBanner(options) }
-        this.options = Object.assign({}, { followMode: false, followTheme: false, titlePrint: false, titlePrintInterval: 300, titleTiktok: false, titleText: "来自小莫唐尼的Joe首页大图", titleColor: "#ffffff", titleShadow: "-3px 2px 6px #1c1f21", hitokotoParams: {}, hitokotoApi: "https://v1.hitokoto.cn", hitokotoColor: "#ffffff", hitokotoEnable: true, }, options);
+        this.options = Object.assign({}, { followMode: false, followTheme: false, titlePrint: false, titlePrintInterval: 300, titleTiktok: false, titleText: "来自小莫唐尼的Joe首页大图", titleColor: "#ffffff", titleShadow: "-3px 2px 6px #1c1f21", hitokotoParams: {}, hitokotoApi: "https://v1.hitokoto.cn", hitokotoColor: "#ffffff", hitokotoEnable: true, hitokotoInterval: 6000}, options);
         this.init()
     };
     const Utils = { checkIsMobile: function() { return /Mobi|Android|iPhone/i.test(navigator.userAgent) }, };
@@ -73,7 +73,7 @@
                         _this.dom.hitokotoText.fadeOut(1500);
                         _this.dom.hitokotoForm.fadeOut(1500);
                         setTimeout(function() { _loopFn(function() { _timerFn() }) }, 1100)
-                    }, 6000)
+                    }, _this.options.hitokotoInterval || 6000)
                 };
                 _loopFn();
                 _timerFn()

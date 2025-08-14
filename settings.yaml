@@ -849,6 +849,13 @@ spec:
           name: big_banner_hitokoto_api
           label: 一言api地址
           value: "https://v1.hitokoto.cn"
+          help: "一言请求的api地址，默认https://v1.hitokoto.cn"
+        - $formkit: number
+          if: "$get(enable_big_banner_hitokoto).value === true"
+          name: big_banner_hitokoto_interval
+          label: 一言切换间隔
+          value: 6000
+          help: "间隔多长时间切换一次，默认6000（单位：毫秒）"
         - $formkit: select
           if: "$get(enable_big_banner).value === true"
           name: enable_big_banner_video
