@@ -844,6 +844,11 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: text
+          if: "$get(enable_big_banner_hitokoto).value === true"
+          name: big_banner_hitokoto_api
+          label: 一言api地址
+          value: "https://v1.hitokoto.cn"
         - $formkit: select
           if: "$get(enable_big_banner).value === true"
           name: enable_big_banner_video
@@ -870,6 +875,11 @@ spec:
           name: dark_color
           label: 暗色底部波浪颜色
           value: "#fff"
+        - $formkit: text
+          if: "$get(enable_big_banner).value === true"
+          name: wave_height
+          label: 底部波浪高度
+          value: '40px'
     - group: navbar
       label: 导航
       formSchema:
