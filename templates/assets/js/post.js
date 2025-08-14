@@ -81,6 +81,7 @@ const postContext = {
 
 		const curl = location.href;
 		const author = $(".joe_detail").attr("data-author");
+		const authorUsername = $(".joe_detail").attr("data-author-username");
 		const postTitle = $(".joe_detail .joe_detail__title").text();
 		const postDescription = $('html head meta[name=description]').attr('content');
 
@@ -88,7 +89,7 @@ const postContext = {
 			const selection = window.getSelection();
 			const selectionText = selection.toString().replace(/<已自动折叠>/g, "");
 
-			const appendLink = (ThemeConfig.enable_copy_right_text
+			const appendLink = (ThemeConfig.enable_copy_right_text && !(authorUsername && window.Joe.getLoginedUserInfo().username === authorUsername)
 				? ThemeConfig.copy_right_text ||
 				`\r\n\r\n====================================\r\n文章作者： ${author}\r\n文章来源： ${ThemeConfig.blog_title}(${ThemeConfig.blog_url})\r\n文章标题： ${postTitle}\r\n文章链接： ${curl}\r\n版权声明： 内容遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。`
 				: "")

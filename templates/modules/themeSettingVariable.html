@@ -80,9 +80,7 @@
        blog_url : /*[[${#strings.substring(site.url, #strings.length(site.url) - 1)== '/'}? ${#strings.substring(site.url,0,#strings.length(site.url) - 1)}:${site.url}]]*/ '',
        blog_title : /*[[${site.title}]]*/ '',
        BASE_RES_URL :  /*[[${(#strings.trim(theme.config.basic.source_link) !='' && theme.config.basic.enable_source_link)? theme.config.basic.source_link : '/themes/theme-Joe3-qiu'}]]*/'',
-       BASE_URL : 'https://bbchin.com',
-
-      
+       BASE_URL : /*[[${theme.config.other.baidu_collect_api_host}]]*/ 'https://bbchin.com',
     }
     //转数字
     ThemeConfig.banner_speed = parseInt(ThemeConfig.banner_speed)
